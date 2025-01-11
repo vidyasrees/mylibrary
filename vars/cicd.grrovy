@@ -1,16 +1,16 @@
 def newGit(repo)
 {
-    git "${repo}"
+    git "https://github.com/vidyasrees/${repo}.git"
 }
 def newMaven()
 {
-    sh 'mvn package'
+    sh "mvn package"
 }
-def newDeploy(workspace,ip,context)
+def newDeploy(jobname,ip,context)
 {
-    sh 'scp /var/lib/jenkins/workspace/${workspace}/webapp/target/webapp.war ubuntu@${ip}:/var/lib/tomcat10/webapps/${context}.war'
+    sh "scp /var/lib/jenkins/workspace/${jobname}/webapp/target/webapp.war ubuntu@${ip}:/var/lib/tomcat10/webapps/${context}.war"
 }
-def runSelenium(workspace)
+def runSelenium(jobname)
 {
-     sh java -jar /var/lib/jenkins/workspace/${workspace}/testing.jar
+     sh "java -jar /var/lib/jenkins/workspace/${jobname}/testing.jar"
 }
